@@ -15,15 +15,11 @@ class Plant(ABC):
 
     def calculate_needs(self, rainfall, soil_moisture):
         print(f"Weather Report: Rainfall = {rainfall} mm, Soil Moisture = {soil_moisture}%")
-
-
-        # Logika penyesuaian kebutuhan air dan pupuk
+        # Logika penyesuaian kebutuhan air
         if rainfall >= 8 and soil_moisture >= 60:
             self._adjusted_water_needs = int(self._water_needs * 0.75)  # pengurangan 25%
-            self._adjusted_fertilizer_needs = int(self._fertilizer_needs * 0.8)  # pengurangan 20%
         else:
             self._adjusted_water_needs = self._water_needs
-            self._adjusted_fertilizer_needs = self._fertilizer_needs
 
         # Logika penyesuaian pupuk (misal tidak berubah, atau bisa disesuaikan)
         if soil_moisture < 50:
@@ -43,7 +39,7 @@ class Plant(ABC):
 
 class RicePlant(Plant):
     def __init__(self):
-        super().__init__(name="Rice", water_needs=20, fertilizer_needs=5)
+        super().__init__("Rice", 20, 5)
 
     def grow(self):
         print(f"{self._name} is growing in the paddy field")
@@ -52,7 +48,7 @@ class RicePlant(Plant):
 
 class CornPlant(Plant):
     def __init__(self):
-        super().__init__(name="Corn", water_needs=18, fertilizer_needs=7)
+        super().__init__("Corn", 18, 7)
 
 
     def grow(self):
